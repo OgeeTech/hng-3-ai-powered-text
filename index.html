@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Chat Box</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts for a modern look -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+ 
+</head>
+<body>
+  <header>
+    <h1>AI Chat</h1>
+    <button class="toggle-dark" id="toggleDark">Dark Mode</button>
+  </header>
+  <!-- History Toggle Button -->
+  <button class="toggle-history" id="toggleHistory">History</button>
+  <!-- History Sidebar -->
+  <div class="history-panel" id="historyPanel" aria-label="Chat history">
+    <h2>Chat History</h2>
+    <div id="historyList"></div>
+  </div>
+  <div class="chat-container">
+    <div class="chat-area" id="chatArea" aria-live="polite"></div>
+    <div class="input-area">
+      <div class="input-wrapper">
+        <textarea id="inputText" placeholder="Type your message..." aria-label="Message input"></textarea>
+        <button class="mic-btn" id="micButton" aria-label="Voice input">🎤</button>
+      </div>
+      <button class="send" id="sendButton" aria-label="Send message">➤</button>
+    </div>
+  </div>
+  
+</body>
+</html>
