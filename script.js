@@ -251,3 +251,36 @@
         metaEl.textContent = "Error detecting language.";
       }
     }
+
+
+    //language translate
+async function translateText(text, targetLang) {
+    try {
+        if ('ai' in self && 'translator' in self.ai) {
+            const translatorCapabilities = await self.ai.translator.capabilities();
+            const availability = await translatorCapabilities.languagePairAvailable('en', targetLang); // Check availability
+
+            if (availability === 'readily' || availability === 'after-download') {
+                const translator = await self.ai.translator.create({
+                    sourceLanguage: 'en',
+                    targetLanguage: targetLang,
+                    monitor(m) {
+                        m.addEventListener('downloadprogress', (e) => {
+                            console.log(`Downloaded ${e.loaded} of ${e.total} bytes.`);
+                        });
+                    },
+                });
+
+                const translation = await translator.translate(text);
+                return translation;
+            } else {
+                return `Translation to ${targetLang} is not currently supported. Availability: ${availability}`; // Handle unsupported languages
+            }
+        } else {
+            return "Translator API is not supported in this browser."; // Handle API absence
+        }
+    } catch (error) {
+        console.error("Translation error:", error);
+        return "Error during translation: " + error.message; // More informative error message
+    }
+}
